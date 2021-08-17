@@ -1,0 +1,13 @@
+{
+  "name": "redraw",
+  "version": "1.0",
+  "author": "m3yevn",
+  "funFacts": [],
+  "badges": [],
+  "techStacks": [],
+  "screenshots": [],
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1"
+  }
+}
