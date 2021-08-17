@@ -1,7 +1,11 @@
 import Canvas from "./Canvas";
+import Drawable from "./Drawable";
 
-class Wrapper {
+class Wrapper extends Drawable {
   constructor(id, config = {}) {
+    super();
+    
+    this.__items = [];
     this.__wrapper = document.getElementById(id);
 
     if (!(this.__wrapper instanceof HTMLElement)) {
@@ -26,6 +30,8 @@ class Wrapper {
       const addingCanvas = canvas.getCanvas();
       this.__wrapper.appendChild(addingCanvas);
     }
+
+    this.__items.push(canvas);
   }
 }
 

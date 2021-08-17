@@ -1,11 +1,13 @@
-import wrapper from "./utils/Wrapper";
-import canvas from "./utils/Canvas";
-import line from "./utils/Line";
+import Wrapper from "./utils/Wrapper";
+import Canvas from "./utils/Canvas";
+import Line from "./utils/Line";
+import Rect from "./utils/Rect";
 
 const redraw = {
-  Wrapper: wrapper,
-  Canvas: canvas,
-  Line: line,
+  Wrapper,
+  Canvas,
+  Line,
+  Rect,
 };
 
 if (window) {

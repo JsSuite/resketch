@@ -7,19 +7,22 @@ var _Canvas = _interopRequireDefault(require("./utils/Canvas"));
 
 var _Line = _interopRequireDefault(require("./utils/Line"));
 
+var _Rect = _interopRequireDefault(require("./utils/Rect"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const redraw = {
   Wrapper: _Wrapper.default,
   Canvas: _Canvas.default,
-  Line: _Line.default
+  Line: _Line.default,
+  Rect: _Rect.default
 };
 
 if (window) {
   window.REDRAW = redraw;
 }
 
-},{"./utils/Canvas":2,"./utils/Line":3,"./utils/Wrapper":4}],2:[function(require,module,exports){
+},{"./utils/Canvas":2,"./utils/Line":4,"./utils/Rect":5,"./utils/Wrapper":6}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27,8 +30,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-class Canvas {
+var _Drawable = _interopRequireDefault(require("./Drawable"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Canvas extends _Drawable.default {
   constructor(config = {}) {
+    super();
+    this.__items = [];
     this.__canvas = document.createElement("canvas");
     this.__canvas.style.height = config.height || "873px";
     this.__canvas.style.width = config.width || "1440px";
@@ -55,12 +64,16 @@ class Canvas {
     return this.__canvas.getContext("2d");
   }
 
+  add(item) {
+    this.__items.push(item);
+  }
+
 }
 
 var _default = Canvas;
 exports.default = _default;
 
-},{}],3:[function(require,module,exports){
+},{"./Drawable":3}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -68,12 +81,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-class Line {
+class Drawable {
   constructor() {}
+
+  draw() {
+    window.requestAnimationFrame(() => {
+      this.__items.forEach(item => {
+        item.draw(this.getContext());
+      });
+    }, 0);
+  }
 
 }
 
-var _default = Line;
+var _default = Drawable;
 exports.default = _default;
 
 },{}],4:[function(require,module,exports){
@@ -84,12 +105,81 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+class Line {
+  constructor(config = {}) {
+    this.__line = {};
+    this.__line.points = config.points || [];
+    this.__line.options = config.options || {};
+  }
+
+  draw(ctx) {
+    ctx.beginPath();
+    Object.keys(this.__line.options).forEach(key => {
+      ctx[key] = this.__line.options[key];
+    });
+
+    this.__line.points.forEach((point, index) => {
+      if (!Array.isArray(point)) {
+        return;
+      }
+
+      if (index === 0) {
+        return ctx.moveTo(...point);
+      }
+
+      ctx.lineTo(...point);
+    });
+
+    ctx.stroke();
+  }
+
+}
+
+var _default = Line;
+exports.default = _default;
+
+},{}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+class Rect {
+  constructor(config = {}) {
+    this.__rect = {};
+    this.__rect.config = config;
+  }
+
+  draw(ctx) {
+    ctx.strokeStyle = "#FF0000";
+    ctx.strokeRect(300, 20, 150, 100);
+  }
+
+}
+
+var _default = Rect;
+exports.default = _default;
+
+},{}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var _Canvas = _interopRequireDefault(require("./Canvas"));
+
+var _Drawable = _interopRequireDefault(require("./Drawable"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Wrapper {
+class Wrapper extends _Drawable.default {
   constructor(id, config = {}) {
+    super();
+    this.__items = [];
     this.__wrapper = document.getElementById(id);
 
     if (!(this.__wrapper instanceof HTMLElement)) {
@@ -111,6 +201,8 @@ class Wrapper {
 
       this.__wrapper.appendChild(addingCanvas);
     }
+
+    this.__items.push(canvas);
   }
 
 }
@@ -118,4 +210,4 @@ class Wrapper {
 var _default = Wrapper;
 exports.default = _default;
 
-},{"./Canvas":2}]},{},[1]);
+},{"./Canvas":2,"./Drawable":3}]},{},[1]);

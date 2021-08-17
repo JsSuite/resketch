@@ -1,5 +1,10 @@
-class Canvas {
+import Drawable from "./Drawable";
+
+class Canvas extends Drawable {
   constructor(config = {}) {
+    super();
+
+    this.__items = [];
     this.__canvas = document.createElement("canvas");
 
     this.__canvas.style.height = config.height || "873px";
@@ -25,6 +30,10 @@ class Canvas {
 
   getContext() {
     return this.__canvas.getContext("2d");
+  }
+
+  add(item) {
+    this.__items.push(item);
   }
 }
 
