@@ -35,6 +35,10 @@ class Canvas extends Drawable {
   add(item) {
     this.__items.push(item);
   }
+
+  clear() {
+    this.__items = [];
+  }
 }
 
 export default Canvas;
