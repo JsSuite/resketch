@@ -5,7 +5,7 @@ import Rect from "./utils/Rect";
 import Curve from "./utils/Curve";
 import Text from "./utils/Text";
 
-const redraw = {
+const resketch = {
   Wrapper,
   Canvas,
   Line,
@@ -15,5 +15,5 @@ const redraw = {
 };
 
 if (window) {
-  window.REDRAW = redraw;
+  window.RESKETCH = resketch;
 }

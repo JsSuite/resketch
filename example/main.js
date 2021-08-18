@@ -1,4 +1,4 @@
-const RDW = window.REDRAW;
+const RES = window.RESKETCH;
 
 let primaryColor = "blueviolet";
 let secondaryColor = "deeppink";
@@ -8,8 +8,8 @@ const config = {
   background: "whitesmoke",
 };
 
-const wrapper = new RDW.Wrapper("redraw-container", config);
-const canvas = new RDW.Canvas(config);
+const wrapper = new RES.Wrapper("redraw-container", config);
+const canvas = new RES.Canvas(config);
 wrapper.add(canvas);
 
 setInterval(() => {
@@ -23,7 +23,7 @@ function drawExample() {
   canvas.clear();
 
   //Simple Line
-  const lineExample = new RDW.Line({
+  const lineExample = new RES.Line({
     points: [
       [100, 100],
       [200, 200],
@@ -39,7 +39,7 @@ function drawExample() {
   canvas.add(lineExample);
 
   //Transparent Rect with Border
-  const rectExample = new RDW.Rect({
+  const rectExample = new RES.Rect({
     x: 400,
     y: 100,
     width: 200,
@@ -54,7 +54,7 @@ function drawExample() {
   canvas.add(rectExample);
 
   //Filled Rect with Border
-  const rectExampleFilled = new RDW.Rect({
+  const rectExampleFilled = new RES.Rect({
     x: 700,
     y: 100,
     width: 200,
@@ -70,7 +70,7 @@ function drawExample() {
   canvas.add(rectExampleFilled);
 
   //Bezier Curve Line
-  const curveExampleBz = new RDW.Curve({
+  const curveExampleBz = new RES.Curve({
     points: [
       [1000, 105, 1300, 120, 1100, 200],
       [1100, 200, 900, 270, 1200, 305],
@@ -84,7 +84,7 @@ function drawExample() {
   });
 
   //Quadratic Curve Line
-  const curveExampleQd = new RDW.Curve({
+  const curveExampleQd = new RES.Curve({
     points: [
       [1400, 105, 1200, 120, 1440, 200],
       [1480, 200, 1500, 220, 1400, 300],
@@ -101,7 +101,7 @@ function drawExample() {
   canvas.add(curveExampleQd);
 
   //Hollowed Text with Border
-  const textExample = new RDW.Text({
+  const textExample = new RES.Text({
     text: "Hello",
     x: 100,
     y: 500,
@@ -115,7 +115,7 @@ function drawExample() {
   canvas.add(textExample);
 
   //Filled Text with Border
-  const textExampleFilled = new RDW.Text({
+  const textExampleFilled = new RES.Text({
     text: "Redraw",
     x: 400,
     y: 500,

@@ -15,7 +15,7 @@ var _Text = _interopRequireDefault(require("./utils/Text"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const redraw = {
+const resketch = {
   Wrapper: _Wrapper.default,
   Canvas: _Canvas.default,
   Line: _Line.default,
@@ -25,7 +25,7 @@ const redraw = {
 };
 
 if (window) {
-  window.REDRAW = redraw;
+  window.RESKETCH = resketch;
 }
 
 },{"./utils/Canvas":2,"./utils/Curve":3,"./utils/Line":5,"./utils/Rect":6,"./utils/Text":7,"./utils/Wrapper":8}],2:[function(require,module,exports){
