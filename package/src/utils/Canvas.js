@@ -12,7 +12,7 @@ class Canvas extends Drawable {
     this.__canvas.style.background = config.background || "transparent";
 
     if (config.height.includes("vh")) {
-      this.__canvas.height = parseInt(config.height) * 19.2 || 0;
+      this.__canvas.height = parseInt(config.height) * 9.69 || 0;
     } else {
       this.__canvas.height = parseInt(config.height) || 0;
     }

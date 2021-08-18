@@ -1,18 +1,17 @@
-class Line {
+import Drawable from "./Drawable";
+
+class Line extends Drawable {
   constructor(config = {}) {
-    this.__line = {};
-    this.__line.points = config.points || [];
-    this.__line.options = config.options || {};
+    super();
+    this.points = config.points || [];
+    this.options = config.options || {};
   }
 
   draw(ctx) {
     ctx.beginPath();
+    this.setCtxProperties(ctx);
 
-    Object.keys(this.__line.options).forEach((key) => {
-      ctx[key] = this.__line.options[key];
-    });
-
-    this.__line.points.forEach((point, index) => {
+    this.points.forEach((point, index) => {
       if (!Array.isArray(point)) {
         return;
       }
@@ -23,6 +22,7 @@ class Line {
     });
 
     ctx.stroke();
+    this.resetCtxProperties(ctx);
   }
 }
 

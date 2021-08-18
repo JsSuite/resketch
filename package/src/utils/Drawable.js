@@ -1,12 +1,41 @@
 class Drawable {
-  constructor() {}
+  constructor() {
+    this.originalCtx = {};
+  }
+
+  setCtxProperties(ctx) {
+    Object.keys(this.options).forEach((key) => {
+      if (key === "dash") {
+        this.originalCtx.dash = ctx.getLineDash();
+        return ctx.setLineDash(this.options[key]);
+      }
+
+      this.originalCtx[key] = ctx[key];
+      ctx[key] = this.options[key];
+    });
+  }
+
+  resetCtxProperties(ctx) {
+    Object.keys(this.options).forEach((key) => {
+      if (key === "dash") {
+        return ctx.setLineDash(this.originalCtx.dash);
+      }
+
+      ctx[key] = this.originalCtx[key];
+    });
+  }
 
   draw() {
-    window.requestAnimationFrame(() => {
-      this.__items.forEach((item) => {
-        item.draw(this.getContext());
-      });
-    }, 0);
+    try {
+      window.requestAnimationFrame(() => {
+        this.__items.forEach((item) => {
+          item.draw(this.getContext());
+        });
+      }, 0);
+    } catch (ex) {
+      console.warn(`[REDRAW] - Error - ${ex.message}`);
+      console.error(ex);
+    }
   }
 }
 
