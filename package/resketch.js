@@ -116,7 +116,10 @@ class Circle extends _Drawable.default {
       ctx.fill();
     }
 
-    ctx.stroke();
+    if (this.options.strokeStyle) {
+      ctx.stroke();
+    }
+
     this.resetCtxProperties(ctx);
   }
 
@@ -154,11 +157,11 @@ class Curve extends _Drawable.default {
       }
 
       if (this.type === "quadratic" && point.length !== 6) {
-        throw new Error(`[REDRAW] - Error - Quadratic curve needs to have three points.`);
+        throw new Error(`[RESKETCH] - Error - Quadratic curve needs to have three points.`);
       }
 
       if (this.type === "bezier" && point.length !== 6) {
-        throw new Error(`[REDRAW] - Error - Bezier curve needs to have three points.`);
+        throw new Error(`[RESKETCH] - Error - Bezier curve needs to have three points.`);
       }
 
       if (this.type === "quadratic") {
@@ -226,7 +229,7 @@ class Drawable {
         });
       }, 0);
     } catch (ex) {
-      console.warn(`[REDRAW] - Error - ${ex.message}`);
+      console.warn(`[RESKETCH] - Error - ${ex.message}`);
       console.error(ex);
     }
   }
@@ -259,8 +262,8 @@ class Line extends _Drawable.default {
     ctx.beginPath();
     this.setCtxProperties(ctx);
     this.points.forEach((point, index) => {
-      if (!Array.isArray(point)) {
-        return;
+      if (!Array.isArray(point) || point?.length <= 1) {
+        throw new Error(`[RESKETCH] - Error - Line needs to have X,Y point.`);
       }
 
       if (index === 0) {
@@ -302,7 +305,10 @@ class Rect extends _Drawable.default {
 
   draw(ctx) {
     this.setCtxProperties(ctx);
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
+
+    if (this.options.strokeStyle) {
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
+    }
 
     if (this.options.fillStyle) {
       ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -341,7 +347,10 @@ class Text extends _Drawable.default {
 
   draw(ctx) {
     this.setCtxProperties(ctx);
-    ctx.strokeText(this.text, this.x, this.y);
+
+    if (this.options.strokeStyle) {
+      ctx.strokeText(this.text, this.x, this.y);
+    }
 
     if (this.options.fillStyle) {
       ctx.fillText(this.text, this.x, this.y);
@@ -376,7 +385,7 @@ class Wrapper extends _Drawable.default {
     this.__wrapper = document.getElementById(id);
 
     if (!(this.__wrapper instanceof HTMLElement)) {
-      return console.warn(`[REDRAW] - Warning - There is no DOM element with ID ${id}`);
+      return console.warn(`[RESKETCH] - Warning - There is no DOM element with ID ${id}`);
     }
 
     this.__wrapper.style.height = config.height || "873px";
@@ -386,7 +395,7 @@ class Wrapper extends _Drawable.default {
 
   add(canvas) {
     if (!(canvas instanceof _Canvas.default)) {
-      return console.error(`[REDRAW] - Error - The provided item is not of Redraw Canvas type.`);
+      return console.error(`[RESKETCH] - Error - The provided item is not of RESKETCH Canvas type.`);
     }
 
     if (this.__wrapper instanceof HTMLElement) {

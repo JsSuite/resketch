@@ -4,13 +4,13 @@ import Drawable from "./Drawable";
 class Wrapper extends Drawable {
   constructor(id, config = {}) {
     super();
-    
+
     this.__items = [];
     this.__wrapper = document.getElementById(id);
 
     if (!(this.__wrapper instanceof HTMLElement)) {
       return console.warn(
-        `[REDRAW] - Warning - There is no DOM element with ID ${id}`
+        `[RESKETCH] - Warning - There is no DOM element with ID ${id}`
       );
     }
 
@@ -22,7 +22,7 @@ class Wrapper extends Drawable {
   add(canvas) {
     if (!(canvas instanceof Canvas)) {
       return console.error(
-        `[REDRAW] - Error - The provided item is not of Redraw Canvas type.`
+        `[RESKETCH] - Error - The provided item is not of RESKETCH Canvas type.`
       );
     }
 

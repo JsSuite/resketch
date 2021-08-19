@@ -12,9 +12,10 @@ class Line extends Drawable {
     this.setCtxProperties(ctx);
 
     this.points.forEach((point, index) => {
-      if (!Array.isArray(point)) {
-        return;
+      if (!Array.isArray(point) || point?.length <= 1) {
+        throw new Error(`[RESKETCH] - Error - Line needs to have X,Y point.`);
       }
+
       if (index === 0) {
         return ctx.moveTo(...point);
       }

@@ -15,7 +15,9 @@ class Text extends Drawable {
   draw(ctx) {
     this.setCtxProperties(ctx);
 
-    ctx.strokeText(this.text, this.x, this.y);
+    if (this.options.strokeStyle) {
+      ctx.strokeText(this.text, this.x, this.y);
+    }
 
     if (this.options.fillStyle) {
       ctx.fillText(this.text, this.x, this.y);

@@ -14,7 +14,9 @@ class Rect extends Drawable {
   draw(ctx) {
     this.setCtxProperties(ctx);
 
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
+    if (this.options.strokeStyle) {
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
+    }
     if (this.options.fillStyle) {
       ctx.fillRect(this.x, this.y, this.width, this.height);
     }

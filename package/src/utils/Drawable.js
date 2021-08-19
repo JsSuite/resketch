@@ -33,7 +33,7 @@ class Drawable {
         });
       }, 0);
     } catch (ex) {
-      console.warn(`[REDRAW] - Error - ${ex.message}`);
+      console.warn(`[RESKETCH] - Error - ${ex.message}`);
       console.error(ex);
     }
   }

@@ -8,7 +8,7 @@ const config = {
   background: "#333",
 };
 
-const wrapper = new RES.Wrapper("redraw-container", config);
+const wrapper = new RES.Wrapper("resketch-container", config);
 const canvas = new RES.Canvas(config);
 wrapper.add(canvas);
 
@@ -96,6 +96,35 @@ function drawExample() {
   canvas.add(curveExampleBz);
   canvas.add(curveExampleQd);
 
+  //Dashed line crossed
+  const lineDashCrossedLeft = new RES.Line({
+    points: [
+      [1600, 105],
+      [1800, 305],
+    ],
+    options: {
+      strokeStyle: primaryColor,
+      lineWidth: 10,
+      lineCap: "butt",
+      dash: [10, 5],
+    },
+  });
+  const lineDashCrossedRight = new RES.Line({
+    points: [
+      [1800, 105],
+      [1600, 305],
+    ],
+    options: {
+      strokeStyle: primaryColor,
+      lineWidth: 10,
+      lineCap: "butt",
+      dash: [10, 5],
+    },
+  });
+
+  canvas.add(lineDashCrossedLeft);
+  canvas.add(lineDashCrossedRight);
+
   //Hollowed Text with Border
   const textExample = new RES.Text({
     text: "Hello",
@@ -112,7 +141,7 @@ function drawExample() {
 
   //Filled Text with Border
   const textExampleFilled = new RES.Text({
-    text: "Redraw",
+    text: "Resketch",
     x: 400,
     y: 500,
     options: {
@@ -151,6 +180,25 @@ function drawExample() {
   });
 
   canvas.add(circleExampleFilled);
+
+  //Filled Rect with shadow
+  const rectExampleShadow = new RES.Rect({
+    x: 1400,
+    y: 350,
+    width: 200,
+    height: 200,
+    options: {
+      shadowColor: "black",
+      shadowBlur: 10,
+      shadowOffsetX: 10,
+      shadowOffsetY: 10,
+      lineWidth: 15,
+      lineCap: "round",
+      fillStyle: secondaryColor,
+    },
+  });
+
+  canvas.add(rectExampleShadow);
 
   canvas.draw();
 }

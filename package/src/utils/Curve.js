@@ -19,13 +19,13 @@ class Curve extends Drawable {
       }
       if (this.type === "quadratic" && point.length !== 6) {
         throw new Error(
-          `[REDRAW] - Error - Quadratic curve needs to have three points.`
+          `[RESKETCH] - Error - Quadratic curve needs to have three points.`
         );
       }
 
       if (this.type === "bezier" && point.length !== 6) {
         throw new Error(
-          `[REDRAW] - Error - Bezier curve needs to have three points.`
+          `[RESKETCH] - Error - Bezier curve needs to have three points.`
         );
       }
 

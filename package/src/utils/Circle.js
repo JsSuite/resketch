@@ -18,7 +18,9 @@ class Circle extends Drawable {
     if (this.options.fillStyle) {
       ctx.fill();
     }
-    ctx.stroke();
+    if (this.options.strokeStyle) {
+      ctx.stroke();
+    }
 
     this.resetCtxProperties(ctx);
   }
