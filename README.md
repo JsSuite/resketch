@@ -51,6 +51,7 @@ SOFTWARE.
 ## Documentation
 
 Examples: https://github.com/JsSuite/resketch/blob/master/example/main.js
+
 Options: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
 
 <hr/>
