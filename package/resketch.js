@@ -13,6 +13,8 @@ var _Curve = _interopRequireDefault(require("./utils/Curve"));
 
 var _Text = _interopRequireDefault(require("./utils/Text"));
 
+var _Circle = _interopRequireDefault(require("./utils/Circle"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const resketch = {
@@ -21,14 +23,15 @@ const resketch = {
   Line: _Line.default,
   Rect: _Rect.default,
   Curve: _Curve.default,
-  Text: _Text.default
+  Text: _Text.default,
+  Circle: _Circle.default
 };
 
 if (window) {
   window.RESKETCH = resketch;
 }
 
-},{"./utils/Canvas":2,"./utils/Curve":3,"./utils/Line":5,"./utils/Rect":6,"./utils/Text":7,"./utils/Wrapper":8}],2:[function(require,module,exports){
+},{"./utils/Canvas":2,"./utils/Circle":3,"./utils/Curve":4,"./utils/Line":6,"./utils/Rect":7,"./utils/Text":8,"./utils/Wrapper":9}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83,7 +86,46 @@ class Canvas extends _Drawable.default {
 var _default = Canvas;
 exports.default = _default;
 
-},{"./Drawable":4}],3:[function(require,module,exports){
+},{"./Drawable":5}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Drawable = _interopRequireDefault(require("./Drawable"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Circle extends _Drawable.default {
+  constructor(config = {}) {
+    super();
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.radius = config.radius || 0;
+    this.options = config.options || {};
+  }
+
+  draw(ctx) {
+    ctx.beginPath();
+    this.setCtxProperties(ctx);
+    ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+
+    if (this.options.fillStyle) {
+      ctx.fill();
+    }
+
+    ctx.stroke();
+    this.resetCtxProperties(ctx);
+  }
+
+}
+
+var _default = Circle;
+exports.default = _default;
+
+},{"./Drawable":5}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -141,7 +183,7 @@ class Curve extends _Drawable.default {
 var _default = Curve;
 exports.default = _default;
 
-},{"./Drawable":4}],4:[function(require,module,exports){
+},{"./Drawable":5}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -194,7 +236,7 @@ class Drawable {
 var _default = Drawable;
 exports.default = _default;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -236,7 +278,7 @@ class Line extends _Drawable.default {
 var _default = Line;
 exports.default = _default;
 
-},{"./Drawable":4}],6:[function(require,module,exports){
+},{"./Drawable":5}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -274,7 +316,7 @@ class Rect extends _Drawable.default {
 var _default = Rect;
 exports.default = _default;
 
-},{"./Drawable":4}],7:[function(require,module,exports){
+},{"./Drawable":5}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -313,7 +355,7 @@ class Text extends _Drawable.default {
 var _default = Text;
 exports.default = _default;
 
-},{"./Drawable":4}],8:[function(require,module,exports){
+},{"./Drawable":5}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -361,4 +403,4 @@ class Wrapper extends _Drawable.default {
 var _default = Wrapper;
 exports.default = _default;
 
-},{"./Canvas":2,"./Drawable":4}]},{},[1]);
+},{"./Canvas":2,"./Drawable":5}]},{},[1]);

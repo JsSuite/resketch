@@ -5,18 +5,14 @@ let secondaryColor = "deeppink";
 const config = {
   height: "100vh",
   width: "100vw",
-  background: "whitesmoke",
+  background: "#333",
 };
 
 const wrapper = new RES.Wrapper("redraw-container", config);
 const canvas = new RES.Canvas(config);
 wrapper.add(canvas);
 
-setInterval(() => {
-  primaryColor = primaryColor === "blueviolet" ? "lightsalmon" : "blueviolet";
-  secondaryColor = secondaryColor === "deeppink" ? "orchid" : "orchid";
-  drawExample();
-}, [1000]);
+drawExample();
 
 function drawExample() {
   //Clear before draw
@@ -46,7 +42,7 @@ function drawExample() {
     height: 200,
     options: {
       strokeStyle: primaryColor,
-      lineWidth: 5,
+      lineWidth: 10,
       lineCap: "round",
     },
   });
@@ -61,7 +57,7 @@ function drawExample() {
     height: 200,
     options: {
       strokeStyle: secondaryColor,
-      lineWidth: 5,
+      lineWidth: 15,
       lineCap: "round",
       fillStyle: primaryColor,
     },
@@ -128,5 +124,33 @@ function drawExample() {
   });
 
   canvas.add(textExampleFilled);
+
+  //Hollowed Circle with Border
+  const circleExample = new RES.Circle({
+    radius: 100,
+    x: 900,
+    y: 450,
+    options: {
+      strokeStyle: primaryColor,
+      lineWidth: 10,
+    },
+  });
+
+  canvas.add(circleExample);
+
+  //Filled Circle with Border
+  const circleExampleFilled = new RES.Circle({
+    radius: 100,
+    x: 1200,
+    y: 450,
+    options: {
+      strokeStyle: secondaryColor,
+      fillStyle: primaryColor,
+      lineWidth: 10,
+    },
+  });
+
+  canvas.add(circleExampleFilled);
+
   canvas.draw();
 }
