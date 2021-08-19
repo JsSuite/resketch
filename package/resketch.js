@@ -15,6 +15,8 @@ var _Text = _interopRequireDefault(require("./utils/Text"));
 
 var _Circle = _interopRequireDefault(require("./utils/Circle"));
 
+var _Gradient = _interopRequireDefault(require("./utils/Gradient"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const resketch = {
@@ -24,14 +26,15 @@ const resketch = {
   Rect: _Rect.default,
   Curve: _Curve.default,
   Text: _Text.default,
-  Circle: _Circle.default
+  Circle: _Circle.default,
+  Gradient: _Gradient.default
 };
 
 if (window) {
   window.RESKETCH = resketch;
 }
 
-},{"./utils/Canvas":2,"./utils/Circle":3,"./utils/Curve":4,"./utils/Line":6,"./utils/Rect":7,"./utils/Text":8,"./utils/Wrapper":9}],2:[function(require,module,exports){
+},{"./utils/Canvas":2,"./utils/Circle":3,"./utils/Curve":4,"./utils/Gradient":6,"./utils/Line":7,"./utils/Rect":8,"./utils/Text":9,"./utils/Wrapper":10}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -153,15 +156,15 @@ class Curve extends _Drawable.default {
     this.setCtxProperties(ctx);
     this.points.forEach((point, index) => {
       if (!Array.isArray(point)) {
-        return;
+        throw new Error(`[RESKETCH] - Error - Curve points needs to be an array.`);
       }
 
       if (this.type === "quadratic" && point.length !== 6) {
-        throw new Error(`[RESKETCH] - Error - Quadratic curve needs to have three points.`);
+        throw new Error(`[RESKETCH] - Error - Quadratic curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo`);
       }
 
       if (this.type === "bezier" && point.length !== 6) {
-        throw new Error(`[RESKETCH] - Error - Bezier curve needs to have three points.`);
+        throw new Error(`[RESKETCH] - Error - Bezier curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo`);
       }
 
       if (this.type === "quadratic") {
@@ -194,6 +197,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _Gradient = _interopRequireDefault(require("./Gradient"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 class Drawable {
   constructor() {
     this.originalCtx = {};
@@ -204,6 +211,11 @@ class Drawable {
       if (key === "dash") {
         this.originalCtx.dash = ctx.getLineDash();
         return ctx.setLineDash(this.options[key]);
+      }
+
+      if ((key === "fillStyle" || key === "strokeStyle") && this.options[key] instanceof _Gradient.default) {
+        this.originalCtx[key] = ctx[key];
+        return ctx[key] = this.options[key].getGradient(ctx);
       }
 
       this.originalCtx[key] = ctx[key];
@@ -239,7 +251,47 @@ class Drawable {
 var _default = Drawable;
 exports.default = _default;
 
-},{}],6:[function(require,module,exports){
+},{"./Gradient":6}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+class Gradient {
+  constructor(config = {}) {
+    this.type = config.type || "linear";
+    this.colors = config.colors || [];
+    this.points = config.points || [];
+    this.gradient = {};
+  }
+
+  getGradient(ctx) {
+    if (this.type === "linear") {
+      this.gradient = ctx.createLinearGradient(...this.points);
+    }
+
+    if (this.type === "radial") {
+      this.gradient = ctx.createRadialGradient(...this.points);
+    }
+
+    this.colors.forEach(color => {
+      if (!Array.isArray(color)) {
+        throw new Error(`[RESKETCH] - Error - Gradient color needs to have offset and color as an array. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop`);
+      }
+
+      this.gradient.addColorStop(...color);
+    });
+    return this.gradient;
+  }
+
+}
+
+var _default = Gradient;
+exports.default = _default;
+
+},{}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -263,7 +315,7 @@ class Line extends _Drawable.default {
     this.setCtxProperties(ctx);
     this.points.forEach((point, index) => {
       if (!Array.isArray(point) || point?.length <= 1) {
-        throw new Error(`[RESKETCH] - Error - Line needs to have X,Y point.`);
+        throw new Error(`[RESKETCH] - Error - Line needs to have X,Y points as an array.`);
       }
 
       if (index === 0) {
@@ -281,7 +333,7 @@ class Line extends _Drawable.default {
 var _default = Line;
 exports.default = _default;
 
-},{"./Drawable":5}],7:[function(require,module,exports){
+},{"./Drawable":5}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -322,7 +374,7 @@ class Rect extends _Drawable.default {
 var _default = Rect;
 exports.default = _default;
 
-},{"./Drawable":5}],8:[function(require,module,exports){
+},{"./Drawable":5}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -364,7 +416,7 @@ class Text extends _Drawable.default {
 var _default = Text;
 exports.default = _default;
 
-},{"./Drawable":5}],9:[function(require,module,exports){
+},{"./Drawable":5}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

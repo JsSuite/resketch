@@ -129,7 +129,7 @@ function drawExample() {
   const textExample = new RES.Text({
     text: "Hello",
     x: 100,
-    y: 500,
+    y: 550,
     options: {
       strokeStyle: primaryColor,
       font: "bold 100px calibri",
@@ -143,7 +143,7 @@ function drawExample() {
   const textExampleFilled = new RES.Text({
     text: "Resketch",
     x: 400,
-    y: 500,
+    y: 550,
     options: {
       strokeStyle: secondaryColor,
       fillStyle: primaryColor,
@@ -158,7 +158,7 @@ function drawExample() {
   const circleExample = new RES.Circle({
     radius: 100,
     x: 900,
-    y: 450,
+    y: 500,
     options: {
       strokeStyle: primaryColor,
       lineWidth: 10,
@@ -171,7 +171,7 @@ function drawExample() {
   const circleExampleFilled = new RES.Circle({
     radius: 100,
     x: 1200,
-    y: 450,
+    y: 500,
     options: {
       strokeStyle: secondaryColor,
       fillStyle: primaryColor,
@@ -184,7 +184,7 @@ function drawExample() {
   //Filled Rect with shadow
   const rectExampleShadow = new RES.Rect({
     x: 1400,
-    y: 350,
+    y: 400,
     width: 200,
     height: 200,
     options: {
@@ -199,6 +199,50 @@ function drawExample() {
   });
 
   canvas.add(rectExampleShadow);
+
+  //Filled Rect with linear gradient
+  const sampleGrad1 = new RES.Gradient({
+    type: "linear",
+    colors: [
+      [0, secondaryColor],
+      [1, primaryColor],
+    ],
+    points: [1650, 350, 1850, 550],
+  });
+
+  const rectExampleGrad = new RES.Rect({
+    x: 1650,
+    y: 400,
+    width: 200,
+    height: 200,
+    options: {
+      fillStyle: sampleGrad1,
+    },
+  });
+
+  canvas.add(rectExampleGrad);
+
+  //Filled Diamond with radial gradient
+  const sampleGrad2 = new RES.Gradient({
+    type: "radial",
+    colors: [
+      [0, primaryColor],
+      [0.5, secondaryColor],
+      [1, secondaryColor],
+    ],
+    points: [200, 780, 100, 180, 780, 20],
+  });
+
+  const rectExampleGradRadial = new RES.Circle({
+    radius: 100,
+    x: 200,
+    y: 780,
+    options: {
+      fillStyle: sampleGrad2,
+    },
+  });
+
+  canvas.add(rectExampleGradRadial);
 
   canvas.draw();
 }

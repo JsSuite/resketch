@@ -1,3 +1,5 @@
+import Gradient from "./Gradient";
+
 class Drawable {
   constructor() {
     this.originalCtx = {};
@@ -8,6 +10,14 @@ class Drawable {
       if (key === "dash") {
         this.originalCtx.dash = ctx.getLineDash();
         return ctx.setLineDash(this.options[key]);
+      }
+
+      if (
+        (key === "fillStyle" || key === "strokeStyle") &&
+        this.options[key] instanceof Gradient
+      ) {
+        this.originalCtx[key] = ctx[key];
+        return (ctx[key] = this.options[key].getGradient(ctx));
       }
 
       this.originalCtx[key] = ctx[key];

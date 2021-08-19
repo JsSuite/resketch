@@ -15,17 +15,19 @@ class Curve extends Drawable {
 
     this.points.forEach((point, index) => {
       if (!Array.isArray(point)) {
-        return;
+        throw new Error(
+          `[RESKETCH] - Error - Curve points needs to be an array.`
+        );
       }
       if (this.type === "quadratic" && point.length !== 6) {
         throw new Error(
-          `[RESKETCH] - Error - Quadratic curve needs to have three points.`
+          `[RESKETCH] - Error - Quadratic curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo`
         );
       }
 
       if (this.type === "bezier" && point.length !== 6) {
         throw new Error(
-          `[RESKETCH] - Error - Bezier curve needs to have three points.`
+          `[RESKETCH] - Error - Bezier curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo`
         );
       }
 

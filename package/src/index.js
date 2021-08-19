@@ -5,6 +5,7 @@ import Rect from "./utils/Rect";
 import Curve from "./utils/Curve";
 import Text from "./utils/Text";
 import Circle from "./utils/Circle";
+import Gradient from "./utils/Gradient";
 
 const resketch = {
   Wrapper,
@@ -14,6 +15,7 @@ const resketch = {
   Curve,
   Text,
   Circle,
+  Gradient,
 };
 
 if (window) {
