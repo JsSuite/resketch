@@ -43,7 +43,7 @@ class Drawable {
         });
       }, 0);
     } catch (ex) {
-      console.warn(`[RESKETCH] - Error - ${ex.message}`);
+      console.warn(`[VIZAT] - Error - ${ex.message}`);
       console.error(ex);
     }
   }

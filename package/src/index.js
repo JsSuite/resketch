@@ -7,17 +7,15 @@ import Text from "./utils/Text";
 import Circle from "./utils/Circle";
 import Gradient from "./utils/Gradient";
 
-const resketch = {
-  Wrapper,
-  Canvas,
-  Line,
-  Rect,
-  Curve,
-  Text,
-  Circle,
-  Gradient,
-};
-
 if (window) {
-  window.RESKETCH = resketch;
+  window.VIZAT = {
+    Wrapper,
+    Canvas,
+    Line,
+    Rect,
+    Curve,
+    Text,
+    Circle,
+    Gradient,
+  };
 }

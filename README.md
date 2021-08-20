@@ -1,4 +1,4 @@
-# Resketch
+# Vizat
 
 **HTML5 Canvas 2D JavaScript Library**
 
@@ -13,7 +13,7 @@
 
 ## ⭐ Public Url
 
-https://github.com/JsSuite/resketch
+https://github.com/JsSuite/vizat
 
 ## 📚 Tech Stack
 
@@ -50,7 +50,7 @@ SOFTWARE.
 
 ## Documentation
 
-Examples: https://github.com/JsSuite/resketch/blob/master/example/main.js
+Examples: https://github.com/JsSuite/vizat/blob/master/example/main.js
 
 Options: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
 

@@ -13,7 +13,7 @@ class Line extends Drawable {
 
     this.points.forEach((point, index) => {
       if (!Array.isArray(point) || point?.length <= 1) {
-        throw new Error(`[RESKETCH] - Error - Line needs to have X,Y points as an array.`);
+        throw new Error(`[VIZAT] - Error - Line needs to have X,Y points as an array.`);
       }
 
       if (index === 0) {

@@ -1,4 +1,4 @@
-const RES = window.RESKETCH;
+const RES = window.VIZAT;
 
 let primaryColor = "blueviolet";
 let secondaryColor = "deeppink";
@@ -8,7 +8,7 @@ const config = {
   background: "#333",
 };
 
-const wrapper = new RES.Wrapper("resketch-container", config);
+const wrapper = new RES.Wrapper("vizat-container", config);
 const canvas = new RES.Canvas(config);
 wrapper.add(canvas);
 
@@ -141,7 +141,7 @@ function drawExample() {
 
   //Filled Text with Border
   const textExampleFilled = new RES.Text({
-    text: "Resketch",
+    text: "Vizat",
     x: 400,
     y: 550,
     options: {

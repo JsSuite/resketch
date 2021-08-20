@@ -10,7 +10,7 @@ class Wrapper extends Drawable {
 
     if (!(this.__wrapper instanceof HTMLElement)) {
       return console.warn(
-        `[RESKETCH] - Warning - There is no DOM element with ID ${id}`
+        `[VIZAT] - Warning - There is no DOM element with ID ${id}`
       );
     }
 
@@ -22,7 +22,7 @@ class Wrapper extends Drawable {
   add(canvas) {
     if (!(canvas instanceof Canvas)) {
       return console.error(
-        `[RESKETCH] - Error - The provided item is not of RESKETCH Canvas type.`
+        `[VIZAT] - Error - The provided item is not of RESKETCH Canvas type.`
       );
     }
 

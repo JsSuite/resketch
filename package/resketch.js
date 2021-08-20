@@ -156,15 +156,15 @@ class Curve extends _Drawable.default {
     this.setCtxProperties(ctx);
     this.points.forEach((point, index) => {
       if (!Array.isArray(point)) {
-        throw new Error(`[RESKETCH] - Error - Curve points needs to be an array.`);
+        throw new Error(`[VIZAT] - Error - Curve points needs to be an array.`);
       }
 
       if (this.type === "quadratic" && point.length !== 6) {
-        throw new Error(`[RESKETCH] - Error - Quadratic curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo`);
+        throw new Error(`[VIZAT] - Error - Quadratic curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo`);
       }
 
       if (this.type === "bezier" && point.length !== 6) {
-        throw new Error(`[RESKETCH] - Error - Bezier curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo`);
+        throw new Error(`[VIZAT] - Error - Bezier curve needs to have three points. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo`);
       }
 
       if (this.type === "quadratic") {
@@ -241,7 +241,7 @@ class Drawable {
         });
       }, 0);
     } catch (ex) {
-      console.warn(`[RESKETCH] - Error - ${ex.message}`);
+      console.warn(`[VIZAT] - Error - ${ex.message}`);
       console.error(ex);
     }
   }
@@ -278,7 +278,7 @@ class Gradient {
 
     this.colors.forEach(color => {
       if (!Array.isArray(color)) {
-        throw new Error(`[RESKETCH] - Error - Gradient color needs to have offset and color as an array. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop`);
+        throw new Error(`[VIZAT] - Error - Gradient color needs to have offset and color as an array. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop`);
       }
 
       this.gradient.addColorStop(...color);
@@ -315,7 +315,7 @@ class Line extends _Drawable.default {
     this.setCtxProperties(ctx);
     this.points.forEach((point, index) => {
       if (!Array.isArray(point) || point?.length <= 1) {
-        throw new Error(`[RESKETCH] - Error - Line needs to have X,Y points as an array.`);
+        throw new Error(`[VIZAT] - Error - Line needs to have X,Y points as an array.`);
       }
 
       if (index === 0) {
@@ -437,7 +437,7 @@ class Wrapper extends _Drawable.default {
     this.__wrapper = document.getElementById(id);
 
     if (!(this.__wrapper instanceof HTMLElement)) {
-      return console.warn(`[RESKETCH] - Warning - There is no DOM element with ID ${id}`);
+      return console.warn(`[VIZAT] - Warning - There is no DOM element with ID ${id}`);
     }
 
     this.__wrapper.style.height = config.height || "873px";
@@ -447,7 +447,7 @@ class Wrapper extends _Drawable.default {
 
   add(canvas) {
     if (!(canvas instanceof _Canvas.default)) {
-      return console.error(`[RESKETCH] - Error - The provided item is not of RESKETCH Canvas type.`);
+      return console.error(`[VIZAT] - Error - The provided item is not of RESKETCH Canvas type.`);
     }
 
     if (this.__wrapper instanceof HTMLElement) {

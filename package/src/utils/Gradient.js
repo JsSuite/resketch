@@ -18,7 +18,7 @@ class Gradient {
     this.colors.forEach((color) => {
       if (!Array.isArray(color)) {
         throw new Error(
-          `[RESKETCH] - Error - Gradient color needs to have offset and color as an array. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop`
+          `[VIZAT] - Error - Gradient color needs to have offset and color as an array. Read more at https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop`
         );
       }
 
