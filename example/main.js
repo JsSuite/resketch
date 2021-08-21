@@ -244,5 +244,18 @@ function drawExample() {
 
   canvas.add(rectExampleGradRadial);
 
+  const rotatedRect = new RES.Rect({
+    x: 420,
+    y: 680,
+    width: 180,
+    height: 180,
+    options: {
+      fillStyle: secondaryColor,
+      rotation: 45,
+    },
+  });
+
+  canvas.add(rotatedRect);
+
   canvas.draw();
 }

@@ -19,19 +19,17 @@ var _Gradient = _interopRequireDefault(require("./utils/Gradient"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const resketch = {
-  Wrapper: _Wrapper.default,
-  Canvas: _Canvas.default,
-  Line: _Line.default,
-  Rect: _Rect.default,
-  Curve: _Curve.default,
-  Text: _Text.default,
-  Circle: _Circle.default,
-  Gradient: _Gradient.default
-};
-
 if (window) {
-  window.RESKETCH = resketch;
+  window.VIZAT = {
+    Wrapper: _Wrapper.default,
+    Canvas: _Canvas.default,
+    Line: _Line.default,
+    Rect: _Rect.default,
+    Curve: _Curve.default,
+    Text: _Text.default,
+    Circle: _Circle.default,
+    Gradient: _Gradient.default
+  };
 }
 
 },{"./utils/Canvas":2,"./utils/Circle":3,"./utils/Curve":4,"./utils/Gradient":6,"./utils/Line":7,"./utils/Rect":8,"./utils/Text":9,"./utils/Wrapper":10}],2:[function(require,module,exports){
@@ -229,6 +227,10 @@ class Drawable {
         return ctx.setLineDash(this.originalCtx.dash);
       }
 
+      if (key === "rotation") {
+        return ctx.rotate(this.originalCtx.rotation);
+      }
+
       ctx[key] = this.originalCtx[key];
     });
   }
@@ -357,6 +359,14 @@ class Rect extends _Drawable.default {
 
   draw(ctx) {
     this.setCtxProperties(ctx);
+
+    if (!!this.options.rotation) {
+      const translateX = this.x + this.width / 2;
+      const translateY = this.y + this.height / 2;
+      ctx.translate(translateX, translateY);
+      ctx.rotate(this.options.rotation * Math.PI / 180);
+      ctx.translate(-translateX, -translateY);
+    }
 
     if (this.options.strokeStyle) {
       ctx.strokeRect(this.x, this.y, this.width, this.height);
