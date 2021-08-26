@@ -13,11 +13,10 @@ class Rect extends Drawable {
 
   draw(ctx) {
     this.setCtxProperties(ctx);
+    const translateX = this.x + this.width / 2;
+    const translateY = this.y + this.height / 2;
 
     if (!!this.options.rotation) {
-      const translateX = this.x + this.width / 2;
-      const translateY = this.y + this.height / 2;
-
       ctx.translate(translateX, translateY);
       ctx.rotate((this.options.rotation * Math.PI) / 180);
       ctx.translate(-translateX, -translateY);
@@ -31,6 +30,11 @@ class Rect extends Drawable {
     }
 
     this.resetCtxProperties(ctx);
+    if (!!this.options.rotation) {
+      ctx.translate(translateX, translateY);
+      ctx.rotate((-this.options.rotation * Math.PI) / 180);
+      ctx.translate(-translateX, -translateY);
+    }
   }
 }
 

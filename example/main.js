@@ -257,5 +257,45 @@ function drawExample() {
 
   canvas.add(rotatedRect);
 
+  const loadedImage = new Image();
+  loadedImage.src =
+    "https://images-na.ssl-images-amazon.com/images/I/6120xNlsj5L.jpg";
+  loadedImage.onload = () => {
+    const imgExample = new RES.Image({
+      dx: 720,
+      dy: 680,
+      dWidth: 200,
+      dHeight: 200,
+      sWidth: 180,
+      sHeight: 280,
+      sx: 720,
+      sy: 680,
+      image: loadedImage,
+    });
+
+    const imgExample2 = new RES.Image({
+      dx: 1020,
+      dy: 680,
+      dWidth: 620,
+      dHeight: 680,
+      sWidth: 800,
+      sHeight: 800,
+      sx: 620,
+      sy: 680,
+      image: loadedImage,
+      options: {
+        shadowColor: "black",
+        shadowBlur: 10,
+        shadowOffsetX: 10,
+        shadowOffsetY: 10,
+        lineWidth: 15,
+        lineCap: "round",
+      },
+    });
+
+    canvas.add(imgExample);
+    canvas.add(imgExample2);
+  };
+
   canvas.draw();
 }

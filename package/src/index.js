@@ -6,6 +6,7 @@ import Curve from "./utils/Curve";
 import Text from "./utils/Text";
 import Circle from "./utils/Circle";
 import Gradient from "./utils/Gradient";
+import Image from "./utils/Image";
 
 if (window) {
   window.VIZAT = {
@@ -17,5 +18,6 @@ if (window) {
     Text,
     Circle,
     Gradient,
+    Image,
   };
 }

@@ -17,6 +17,8 @@ var _Circle = _interopRequireDefault(require("./utils/Circle"));
 
 var _Gradient = _interopRequireDefault(require("./utils/Gradient"));
 
+var _Image = _interopRequireDefault(require("./utils/Image"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 if (window) {
@@ -28,11 +30,12 @@ if (window) {
     Curve: _Curve.default,
     Text: _Text.default,
     Circle: _Circle.default,
-    Gradient: _Gradient.default
+    Gradient: _Gradient.default,
+    Image: _Image.default
   };
 }
 
-},{"./utils/Canvas":2,"./utils/Circle":3,"./utils/Curve":4,"./utils/Gradient":6,"./utils/Line":7,"./utils/Rect":8,"./utils/Text":9,"./utils/Wrapper":10}],2:[function(require,module,exports){
+},{"./utils/Canvas":2,"./utils/Circle":3,"./utils/Curve":4,"./utils/Gradient":6,"./utils/Image":7,"./utils/Line":8,"./utils/Rect":9,"./utils/Text":10,"./utils/Wrapper":11}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -227,10 +230,6 @@ class Drawable {
         return ctx.setLineDash(this.originalCtx.dash);
       }
 
-      if (key === "rotation") {
-        return ctx.rotate(this.originalCtx.rotation);
-      }
-
       ctx[key] = this.originalCtx[key];
     });
   }
@@ -305,6 +304,52 @@ var _Drawable = _interopRequireDefault(require("./Drawable"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+class Image extends _Drawable.default {
+  constructor(config = {}) {
+    super();
+    this.dx = config.dx || 0;
+    this.dy = config.dy || 0;
+    this.dWidth = config.dWidth;
+    this.dHeight = config.dHeight;
+    this.sx = config.sx;
+    this.sy = config.sy;
+    this.sWidth = config.sWidth;
+    this.sHeight = config.sHeight;
+    this.image = config.image;
+    this.options = config.options || {};
+  }
+
+  draw(ctx) {
+    this.setCtxProperties(ctx);
+
+    if (!this.dWidth || !this.dHeight) {
+      ctx.drawImage(this.image, this.dx, this.dy);
+    } else if (this.sx && this.sy && this.sWidth && this.sHeight && this.dWidth && this.dHeight) {
+      ctx.drawImage(this.image, this.sx, this.sy, this.sWidth, this.sHeight, this.dx, this.dy, this.dWidth, this.dHeight);
+    } else if (this.dWidth && this.dHeight) {
+      ctx.drawImage(this.image, this.dx, this.dy, this.dWidth, this.dHeight);
+    }
+
+    this.resetCtxProperties(ctx);
+  }
+
+}
+
+var _default = Image;
+exports.default = _default;
+
+},{"./Drawable":5}],8:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Drawable = _interopRequireDefault(require("./Drawable"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 class Line extends _Drawable.default {
   constructor(config = {}) {
     super();
@@ -335,7 +380,7 @@ class Line extends _Drawable.default {
 var _default = Line;
 exports.default = _default;
 
-},{"./Drawable":5}],8:[function(require,module,exports){
+},{"./Drawable":5}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -359,10 +404,10 @@ class Rect extends _Drawable.default {
 
   draw(ctx) {
     this.setCtxProperties(ctx);
+    const translateX = this.x + this.width / 2;
+    const translateY = this.y + this.height / 2;
 
     if (!!this.options.rotation) {
-      const translateX = this.x + this.width / 2;
-      const translateY = this.y + this.height / 2;
       ctx.translate(translateX, translateY);
       ctx.rotate(this.options.rotation * Math.PI / 180);
       ctx.translate(-translateX, -translateY);
@@ -377,6 +422,12 @@ class Rect extends _Drawable.default {
     }
 
     this.resetCtxProperties(ctx);
+
+    if (!!this.options.rotation) {
+      ctx.translate(translateX, translateY);
+      ctx.rotate(-this.options.rotation * Math.PI / 180);
+      ctx.translate(-translateX, -translateY);
+    }
   }
 
 }
@@ -384,7 +435,7 @@ class Rect extends _Drawable.default {
 var _default = Rect;
 exports.default = _default;
 
-},{"./Drawable":5}],9:[function(require,module,exports){
+},{"./Drawable":5}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -426,7 +477,7 @@ class Text extends _Drawable.default {
 var _default = Text;
 exports.default = _default;
 
-},{"./Drawable":5}],10:[function(require,module,exports){
+},{"./Drawable":5}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

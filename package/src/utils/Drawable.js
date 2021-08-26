@@ -31,10 +31,6 @@ class Drawable {
         return ctx.setLineDash(this.originalCtx.dash);
       }
 
-      if (key === "rotation") {
-        return ctx.rotate(this.originalCtx.rotation);
-      }
-
       ctx[key] = this.originalCtx[key];
     });
   }
