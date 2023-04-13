@@ -1,4 +1,4 @@
-class Gradient {
+export class Gradient {
   constructor(config = {}) {
     this.type = config.type || "linear";
     this.colors = config.colors || [];
@@ -28,5 +28,3 @@ class Gradient {
     return this.gradient;
   }
 }
-
-export default Gradient;

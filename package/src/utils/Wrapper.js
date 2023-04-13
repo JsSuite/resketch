@@ -1,7 +1,7 @@
-import Canvas from "./Canvas";
-import Drawable from "./Drawable";
+import { Canvas } from "./Canvas";
+import { Drawable } from "./Drawable";
 
-class Wrapper extends Drawable {
+export class Wrapper extends Drawable {
   constructor(id, config = {}) {
     super();
 
@@ -22,7 +22,7 @@ class Wrapper extends Drawable {
   add(canvas) {
     if (!(canvas instanceof Canvas)) {
       return console.error(
-        `[VIZAT] - Error - The provided item is not of RESKETCH Canvas type.`
+        `[VIZAT] - Error - The provided item is not of Vizat Canvas type.`
       );
     }
 
@@ -34,5 +34,3 @@ class Wrapper extends Drawable {
     this.__items.push(canvas);
   }
 }
-
-export default Wrapper;

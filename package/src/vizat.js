@@ -8,14 +8,16 @@ import { Circle } from "./utils/Circle";
 import { Gradient } from "./utils/Gradient";
 import { Image } from "./utils/Image";
 
-export default {
-  Wrapper,
-  Canvas,
-  Line,
-  Rect,
-  Curve,
-  Text,
-  Circle,
-  Gradient,
-  Image,
-};
+if (window) {
+  window.VIZAT = {
+    Wrapper,
+    Canvas,
+    Line,
+    Rect,
+    Curve,
+    Text,
+    Circle,
+    Gradient,
+    Image,
+  };
+}

@@ -1,6 +1,6 @@
-import Drawable from "./Drawable";
+import { Drawable } from "./Drawable";
 
-class Circle extends Drawable {
+export class Circle extends Drawable {
   constructor(config = {}) {
     super();
     this.x = config.x || 0;
@@ -25,5 +25,3 @@ class Circle extends Drawable {
     this.resetCtxProperties(ctx);
   }
 }
-
-export default Circle;

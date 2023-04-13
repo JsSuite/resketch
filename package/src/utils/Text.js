@@ -1,6 +1,6 @@
-import Drawable from "./Drawable";
+import { Drawable } from "./Drawable";
 
-class Text extends Drawable {
+export class Text extends Drawable {
   constructor(config = {}) {
     super();
     this.x = config.x || 0;
@@ -26,5 +26,3 @@ class Text extends Drawable {
     this.resetCtxProperties(ctx);
   }
 }
-
-export default Text;

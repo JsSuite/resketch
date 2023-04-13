@@ -1,15 +1,15 @@
-const RES = window.VIZAT;
+const Viz = window.VIZAT;
 
 let primaryColor = "blueviolet";
 let secondaryColor = "deeppink";
 const config = {
-  height: "100vh",
+  height: "150vh",
   width: "100vw",
   background: "#333",
 };
 
-const wrapper = new RES.Wrapper("vizat-container", config);
-const canvas = new RES.Canvas(config);
+const wrapper = new Viz.Wrapper("vizat-container", config);
+const canvas = new Viz.Canvas(config);
 wrapper.add(canvas);
 
 drawExample();
@@ -19,7 +19,7 @@ function drawExample() {
   canvas.clear();
 
   //Simple Line
-  const lineExample = new RES.Line({
+  const lineExample = new Viz.Line({
     points: [
       [100, 100],
       [200, 200],
@@ -35,7 +35,7 @@ function drawExample() {
   canvas.add(lineExample);
 
   //Transparent Rect with Border
-  const rectExample = new RES.Rect({
+  const rectExample = new Viz.Rect({
     x: 400,
     y: 100,
     width: 200,
@@ -50,7 +50,7 @@ function drawExample() {
   canvas.add(rectExample);
 
   //Filled Rect with Border
-  const rectExampleFilled = new RES.Rect({
+  const rectExampleFilled = new Viz.Rect({
     x: 700,
     y: 100,
     width: 200,
@@ -66,7 +66,7 @@ function drawExample() {
   canvas.add(rectExampleFilled);
 
   //Bezier Curve Line
-  const curveExampleBz = new RES.Curve({
+  const curveExampleBz = new Viz.Curve({
     points: [
       [1000, 105, 1300, 120, 1100, 200],
       [1100, 200, 900, 270, 1200, 305],
@@ -80,7 +80,7 @@ function drawExample() {
   });
 
   //Quadratic Curve Line
-  const curveExampleQd = new RES.Curve({
+  const curveExampleQd = new Viz.Curve({
     points: [
       [1400, 105, 1200, 120, 1440, 200],
       [1480, 200, 1500, 220, 1400, 300],
@@ -97,7 +97,7 @@ function drawExample() {
   canvas.add(curveExampleQd);
 
   //Dashed line crossed
-  const lineDashCrossedLeft = new RES.Line({
+  const lineDashCrossedLeft = new Viz.Line({
     points: [
       [1600, 105],
       [1800, 305],
@@ -109,7 +109,7 @@ function drawExample() {
       dash: [10, 5],
     },
   });
-  const lineDashCrossedRight = new RES.Line({
+  const lineDashCrossedRight = new Viz.Line({
     points: [
       [1800, 105],
       [1600, 305],
@@ -126,7 +126,7 @@ function drawExample() {
   canvas.add(lineDashCrossedRight);
 
   //Hollowed Text with Border
-  const textExample = new RES.Text({
+  const textExample = new Viz.Text({
     text: "Hello",
     x: 100,
     y: 550,
@@ -140,7 +140,7 @@ function drawExample() {
   canvas.add(textExample);
 
   //Filled Text with Border
-  const textExampleFilled = new RES.Text({
+  const textExampleFilled = new Viz.Text({
     text: "Vizat",
     x: 400,
     y: 550,
@@ -155,7 +155,7 @@ function drawExample() {
   canvas.add(textExampleFilled);
 
   //Hollowed Circle with Border
-  const circleExample = new RES.Circle({
+  const circleExample = new Viz.Circle({
     radius: 100,
     x: 900,
     y: 500,
@@ -168,7 +168,7 @@ function drawExample() {
   canvas.add(circleExample);
 
   //Filled Circle with Border
-  const circleExampleFilled = new RES.Circle({
+  const circleExampleFilled = new Viz.Circle({
     radius: 100,
     x: 1200,
     y: 500,
@@ -182,7 +182,7 @@ function drawExample() {
   canvas.add(circleExampleFilled);
 
   //Filled Rect with shadow
-  const rectExampleShadow = new RES.Rect({
+  const rectExampleShadow = new Viz.Rect({
     x: 1400,
     y: 400,
     width: 200,
@@ -201,7 +201,7 @@ function drawExample() {
   canvas.add(rectExampleShadow);
 
   //Filled Rect with linear gradient
-  const sampleGrad1 = new RES.Gradient({
+  const sampleGrad1 = new Viz.Gradient({
     type: "linear",
     colors: [
       [0, secondaryColor],
@@ -210,7 +210,7 @@ function drawExample() {
     points: [1650, 350, 1850, 550],
   });
 
-  const rectExampleGrad = new RES.Rect({
+  const rectExampleGrad = new Viz.Rect({
     x: 1650,
     y: 400,
     width: 200,
@@ -223,7 +223,7 @@ function drawExample() {
   canvas.add(rectExampleGrad);
 
   //Filled Diamond with radial gradient
-  const sampleGrad2 = new RES.Gradient({
+  const sampleGrad2 = new Viz.Gradient({
     type: "radial",
     colors: [
       [0, primaryColor],
@@ -233,7 +233,7 @@ function drawExample() {
     points: [200, 780, 100, 180, 780, 20],
   });
 
-  const rectExampleGradRadial = new RES.Circle({
+  const rectExampleGradRadial = new Viz.Circle({
     radius: 100,
     x: 200,
     y: 780,
@@ -244,7 +244,7 @@ function drawExample() {
 
   canvas.add(rectExampleGradRadial);
 
-  const rotatedRect = new RES.Rect({
+  const rotatedRect = new Viz.Rect({
     x: 420,
     y: 680,
     width: 180,
@@ -261,7 +261,7 @@ function drawExample() {
   loadedImage.src =
     "https://images-na.ssl-images-amazon.com/images/I/6120xNlsj5L.jpg";
   loadedImage.onload = () => {
-    const imgExample = new RES.Image({
+    const imgExample = new Viz.Image({
       dx: 720,
       dy: 680,
       dWidth: 200,
@@ -273,7 +273,7 @@ function drawExample() {
       image: loadedImage,
     });
 
-    const imgExample2 = new RES.Image({
+    const imgExample2 = new Viz.Image({
       dx: 1020,
       dy: 680,
       dWidth: 620,
@@ -295,7 +295,7 @@ function drawExample() {
 
     canvas.add(imgExample);
     canvas.add(imgExample2);
-  };
 
-  canvas.draw();
+    canvas.draw();
+  };
 }

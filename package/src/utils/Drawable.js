@@ -1,6 +1,6 @@
-import Gradient from "./Gradient";
+import { Gradient } from "./Gradient";
 
-class Drawable {
+export class Drawable {
   constructor() {
     this.originalCtx = {};
   }
@@ -48,5 +48,3 @@ class Drawable {
     }
   }
 }
-
-export default Drawable;

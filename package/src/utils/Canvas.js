@@ -1,6 +1,6 @@
-import Drawable from "./Drawable";
+import { Drawable } from "./Drawable";
 
-class Canvas extends Drawable {
+export class Canvas extends Drawable {
   constructor(config = {}) {
     super();
 
@@ -40,5 +40,3 @@ class Canvas extends Drawable {
     this.__items = [];
   }
 }
-
-export default Canvas;

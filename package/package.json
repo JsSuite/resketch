@@ -1,13 +1,20 @@
 {
-  "name": "resketchjs",
-  "version": "1.0",
+  "name": "vizat",
+  "version": "1.0.7",
+  "description": "Vizat - A simple HTML5 Canvas Library",
   "author": "m3yevn",
-  "funFacts": [],
-  "badges": [],
-  "techStacks": [],
-  "screenshots": [],
+  "main": "lib/index.js",
+  "scripts": {
+    "build:browser": "browserify src/vizat.js -p esmify > vizat.js",
+    "build": "babel src -d lib",
+    "publish": "npm publish --access=public"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-transform-modules-umd": "^7.18.6",
     "browserify": "^17.0.0",
+    "es6ify": "^1.6.0",
     "esmify": "^2.1.1"
   }
 }

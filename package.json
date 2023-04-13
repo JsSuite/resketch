@@ -1,0 +1,9 @@
+{
+  "name": "vizat",
+  "version": "1.0.0",
+  "author": "m3yevn",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1"
+  }
+}

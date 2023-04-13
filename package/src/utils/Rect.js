@@ -1,6 +1,6 @@
-import Drawable from "./Drawable";
+import { Drawable } from "./Drawable";
 
-class Rect extends Drawable {
+export class Rect extends Drawable {
   constructor(config = {}) {
     super();
     this.x = config.x || 0;
@@ -37,5 +37,3 @@ class Rect extends Drawable {
     }
   }
 }
-
-export default Rect;

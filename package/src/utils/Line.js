@@ -1,6 +1,6 @@
-import Drawable from "./Drawable";
+import { Drawable } from "./Drawable";
 
-class Line extends Drawable {
+export class Line extends Drawable {
   constructor(config = {}) {
     super();
     this.points = config.points || [];
@@ -26,5 +26,3 @@ class Line extends Drawable {
     this.resetCtxProperties(ctx);
   }
 }
-
-export default Line;

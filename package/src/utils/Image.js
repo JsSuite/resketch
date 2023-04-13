@@ -1,6 +1,6 @@
-import Drawable from "./Drawable";
+import { Drawable } from "./Drawable";
 
-class Image extends Drawable {
+export class Image extends Drawable {
   constructor(config = {}) {
     super();
     this.dx = config.dx || 0;
@@ -48,5 +48,3 @@ class Image extends Drawable {
     this.resetCtxProperties(ctx);
   }
 }
-
-export default Image;
