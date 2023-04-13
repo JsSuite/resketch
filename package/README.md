@@ -2,7 +2,7 @@
 
 **Vizat - A simple HTML5 Canvas Library**
 
-<p>Version 1.0.7</p>
+<p>Version 1.0.8</p>
 <p>by m3yevn</p>
 
 <hr/>

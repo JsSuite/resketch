@@ -1,6 +1,6 @@
 {
   "name": "vizat",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Vizat - A simple HTML5 Canvas Library",
   "author": "m3yevn",
   "main": "lib/index.js",

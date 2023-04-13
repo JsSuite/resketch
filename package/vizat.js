@@ -488,6 +488,10 @@
       this.__wrapper.style.background = config.background || "transparent";
     }
     add(canvas) {
+      if (this.__wrapper.hasChildNodes()) {
+        return; //skip duplicate rendering
+      }
+
       if (!(canvas instanceof _Canvas.Canvas)) {
         return console.error(`[VIZAT] - Error - The provided item is not of Vizat Canvas type.`);
       }

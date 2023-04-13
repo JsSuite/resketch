@@ -20,6 +20,10 @@ export class Wrapper extends Drawable {
   }
 
   add(canvas) {
+    if (this.__wrapper.hasChildNodes()) {
+      return; //skip duplicate rendering
+    }
+
     if (!(canvas instanceof Canvas)) {
       return console.error(
         `[VIZAT] - Error - The provided item is not of Vizat Canvas type.`
